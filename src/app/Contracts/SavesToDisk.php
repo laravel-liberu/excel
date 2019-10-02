@@ -11,5 +11,5 @@ namespace LaravelEnso\Excel\app\Contracts;
 
 interface SavesToDisk
 {
-    public function filePath(): string;
+    public function path(): string;
 }

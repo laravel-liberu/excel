@@ -29,6 +29,8 @@ class ExcelExport
     public function inline()
     {
         $this->handle();
+
+        return $this->exporter->filename();
     }
 
     public function save()
@@ -40,6 +42,8 @@ class ExcelExport
         $this->inline = false;
 
         $this->handle();
+
+        return $this->filePath();
     }
 
     private function handle()
@@ -67,11 +71,7 @@ class ExcelExport
             return $this;
         }
 
-        $this->writer->openToFile(
-            $this->exporter->filePath()
-            .DIRECTORY_SEPARATOR
-            .$this->exporter->filename()
-        );
+        $this->writer->openToFile($this->filePath());
 
         return $this;
     }
@@ -95,5 +95,12 @@ class ExcelExport
     private function row($data)
     {
         return WriterEntityFactory::createRowFromArray($data);
+    }
+
+    private function filePath()
+    {
+        return $this->exporter->path()
+            .DIRECTORY_SEPARATOR
+            .$this->exporter->filename();
     }
 }
