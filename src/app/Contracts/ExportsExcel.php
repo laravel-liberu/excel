@@ -6,7 +6,7 @@
  * Time: 9:36 AM
  */
 
-namespace LaravelEnso\Commercial\app\Contracts;
+namespace LaravelEnso\Excel\app\Contracts;
 
 
 interface ExportsExcel

@@ -6,7 +6,7 @@
  * Time: 10:54 AM
  */
 
-namespace LaravelEnso\Commercial\app\Contracts;
+namespace LaravelEnso\Excel\app\Contracts;
 
 
 interface SavesToDisk

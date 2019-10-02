@@ -6,11 +6,11 @@
  * Time: 5:59 PM
  */
 
-namespace LaravelEnso\Commercial\app\Exports;
+namespace LaravelEnso\Excel\app\Exports;
 
 use UnexpectedValueException;
-use LaravelEnso\Commercial\app\Contracts\SavesToDisk;
-use LaravelEnso\Commercial\app\Contracts\ExportsExcel;
+use LaravelEnso\Excel\app\Contracts\SavesToDisk;
+use LaravelEnso\Excel\app\Contracts\ExportsExcel;
 use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 
