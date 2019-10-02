@@ -1,10 +1,4 @@
 <?php
-/**
- * Created with luv for rolcrispa.
- * User: mihai
- * Date: 10/1/19
- * Time: 5:59 PM
- */
 
 namespace LaravelEnso\Excel\app\Exports;
 
