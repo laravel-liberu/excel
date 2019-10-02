@@ -1,0 +1,46 @@
+{
+    "name": "laravel-enso/excel",
+    "description": "Excel for Laravel Enso",
+    "keywords": [
+        "laravel-enso",
+        "excel",
+        "laravel"
+    ],
+    "homepage": "https://github.com/laravel-enso/excel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ionut Pirvulescu",
+            "email": "ionut.pirvulescu@earthlink.ro",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Mihai Ocneanu",
+            "email": "mihai.ocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Adrian Ocneanu",
+            "email": "aocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "box/spout": "^3.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelEnso\\Excel\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    }
+}

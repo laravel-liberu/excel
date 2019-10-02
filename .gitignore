@@ -1,0 +1,8 @@
+/node_modules
+/.vscode
+/vendor
+/.idea
+.DS_STORE
+.DS_Store
+.php_cs
+.php_cs.cache
