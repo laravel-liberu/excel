@@ -42,14 +42,14 @@ class ExcelExport
 
     private function handle()
     {
-        $this->setWriter()
+        $this->writer()
             ->addHeading()
             ->addRows();
 
         $this->writer->close();
     }
 
-    private function setWriter()
+    private function writer()
     {
         $defaultStyle = (new StyleBuilder())
             ->setShouldWrapText(false)
