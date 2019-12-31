@@ -1,18 +1,20 @@
 <?php
 
-namespace LaravelEnso\Excel\app\Exports;
+namespace LaravelEnso\Excel\App\Exports;
 
-use UnexpectedValueException;
-use LaravelEnso\Excel\app\Contracts\SavesToDisk;
-use LaravelEnso\Excel\app\Contracts\ExportsExcel;
+use Box\Spout\Common\Entity\Row;
 use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Box\Spout\Writer\XLSX\Writer;
+use LaravelEnso\Excel\App\Contracts\ExportsExcel;
+use LaravelEnso\Excel\App\Contracts\SavesToDisk;
+use LaravelEnso\Excel\App\Exceptions\ExcelExport as Exception;
 
 class ExcelExport
 {
-    private $writer;
-    private $exporter;
-    private $inline;
+    private Writer $writer;
+    private ExportsExcel $exporter;
+    private bool $inline;
 
     public function __construct(ExportsExcel $exporter)
     {
@@ -20,17 +22,17 @@ class ExcelExport
         $this->inline = true;
     }
 
-    public function inline()
+    public function inline(): string
     {
         $this->handle();
 
         return $this->exporter->filename();
     }
 
-    public function save()
+    public function save(): string
     {
         if (! $this->exporter instanceof SavesToDisk) {
-            throw new UnexpectedValueException('User must implement SavesToDisk interface.');
+            throw Exception::missingInterface();
         }
 
         $this->inline = false;
@@ -40,16 +42,16 @@ class ExcelExport
         return $this->filePath();
     }
 
-    private function handle()
+    private function handle(): void
     {
-        $this->setWriter()
-            ->addHeading()
-            ->addRows();
+        $this->writer()
+            ->heading()
+            ->rows();
 
         $this->writer->close();
     }
 
-    private function setWriter()
+    private function writer(): self
     {
         $defaultStyle = (new StyleBuilder())
             ->setShouldWrapText(false)
@@ -70,28 +72,28 @@ class ExcelExport
         return $this;
     }
 
-    private function addHeading()
+    private function heading(): self
     {
         $this->writer->addRow($this->row($this->exporter->heading()));
 
         return $this;
     }
 
-    private function addRows()
+    private function rows(): self
     {
-        collect($this->exporter->rows())->each(function ($row) {
+        foreach ($this->exporter->rows() as $row) {
             $this->writer->addRow($this->row($row));
-        });
+        }
 
         return $this;
     }
 
-    private function row($data)
+    private function row($data): Row
     {
         return WriterEntityFactory::createRowFromArray($data);
     }
 
-    private function filePath()
+    private function filePath(): string
     {
         return $this->exporter->path()
             .DIRECTORY_SEPARATOR

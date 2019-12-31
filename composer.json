@@ -31,17 +31,11 @@
     ],
     "require": {
         "box/spout": "^3.0.1",
-        "php": ">=7.3.0"
+        "php": ">=7.4"
     },
     "autoload": {
         "psr-4": {
             "LaravelEnso\\Excel\\": "src/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [],
-            "aliases": {}
         }
     }
 }
