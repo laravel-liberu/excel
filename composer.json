@@ -30,7 +30,7 @@
         }
     ],
     "require": {
-        "box/spout": "^3.0.1",
+        "box/spout": "^3.0",
         "php": ">=7.4"
     },
     "autoload": {
