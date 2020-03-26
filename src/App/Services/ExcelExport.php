@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Excel\App\Exports;
+namespace LaravelEnso\Excel\App\Services;
 
 use Box\Spout\Common\Entity\Row;
 use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
