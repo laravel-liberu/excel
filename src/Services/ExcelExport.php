@@ -1,14 +1,14 @@
 <?php
 
-namespace LaravelEnso\Excel\App\Services;
+namespace LaravelEnso\Excel\Services;
 
 use Box\Spout\Common\Entity\Row;
 use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\XLSX\Writer;
-use LaravelEnso\Excel\App\Contracts\ExportsExcel;
-use LaravelEnso\Excel\App\Contracts\SavesToDisk;
-use LaravelEnso\Excel\App\Exceptions\ExcelExport as Exception;
+use LaravelEnso\Excel\Contracts\ExportsExcel;
+use LaravelEnso\Excel\Contracts\SavesToDisk;
+use LaravelEnso\Excel\Exceptions\ExcelExport as Exception;
 
 class ExcelExport
 {

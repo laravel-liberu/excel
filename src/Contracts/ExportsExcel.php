@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Excel\App\Contracts;
+namespace LaravelEnso\Excel\Contracts;
 
 interface ExportsExcel
 {
