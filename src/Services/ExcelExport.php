@@ -85,7 +85,6 @@ class ExcelExport
         return $this;
     }
 
-
     private function heading(string $sheet): self
     {
         $this->writer->addRow($this->row($this->exporter->heading($sheet)));
