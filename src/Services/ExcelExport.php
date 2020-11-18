@@ -47,7 +47,7 @@ class ExcelExport
     {
         $this->writer();
 
-        (new Collection($this->exporter->sheets()))
+        Collection::wrap($this->exporter->sheets())
             ->each(fn ($sheet, $sheetIndex) => $this->sheet($sheet, $sheetIndex)
                 ->heading($sheet)
                 ->rows($sheet));
