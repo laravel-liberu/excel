@@ -6,6 +6,7 @@ use Box\Spout\Common\Entity\Row;
 use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\XLSX\Writer;
+use Illuminate\Support\Collection;
 use LaravelEnso\Excel\Contracts\ExportsExcel;
 use LaravelEnso\Excel\Contracts\SavesToDisk;
 use LaravelEnso\Excel\Exceptions\ExcelExport as Exception;
@@ -44,14 +45,17 @@ class ExcelExport
 
     private function handle(): void
     {
-        $this->writer()
-            ->heading()
-            ->rows();
+        $this->writer();
+
+        Collection::wrap($this->exporter->sheets())
+            ->each(fn ($sheet, $sheetIndex) => $this->sheet($sheet, $sheetIndex)
+                ->heading($sheet)
+                ->rows($sheet));
 
         $this->writer->close();
     }
 
-    private function writer(): self
+    private function writer()
     {
         $defaultStyle = (new StyleBuilder())
             ->setShouldWrapText(false)
@@ -68,20 +72,29 @@ class ExcelExport
         }
 
         $this->writer->openToFile($this->filePath());
+    }
+
+    private function sheet(string $sheet, int $sheetIndex): self
+    {
+        if ($sheetIndex > 0) {
+            $this->writer->addNewSheetAndMakeItCurrent();
+        }
+
+        $this->writer->getCurrentSheet()->setName($sheet);
 
         return $this;
     }
 
-    private function heading(): self
+    private function heading(string $sheet): self
     {
-        $this->writer->addRow($this->row($this->exporter->heading()));
+        $this->writer->addRow($this->row($this->exporter->heading($sheet)));
 
         return $this;
     }
 
-    private function rows(): self
+    private function rows(string $sheet): self
     {
-        foreach ($this->exporter->rows() as $row) {
+        foreach ($this->exporter->rows($sheet) as $row) {
             $this->writer->addRow($this->row($row));
         }
 

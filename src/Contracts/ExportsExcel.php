@@ -6,7 +6,9 @@ interface ExportsExcel
 {
     public function filename(): string;
 
-    public function heading(): array;
+    public function heading(string $sheet): array;
 
-    public function rows(): array;
+    public function rows(string $sheet): array;
+
+    public function sheets(): array;
 }
