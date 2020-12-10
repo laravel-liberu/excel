@@ -43,13 +43,13 @@ class ExcelExport
     private function handle(): void
     {
         $this->writer();
-        \Log::info('writer init');
+
         Collection::wrap($this->exporter->sheets())
             ->each(fn ($sheet, $index) => $this
                 ->sheet($sheet, $index)
                 ->heading($sheet)
                 ->rows($sheet));
-        \Log::info('done');
+
         $this->writer->close();
     }
 
