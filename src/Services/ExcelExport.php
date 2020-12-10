@@ -7,51 +7,49 @@ use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\XLSX\Writer;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use LaravelEnso\Excel\Contracts\ExportsExcel;
 use LaravelEnso\Excel\Contracts\SavesToDisk;
-use LaravelEnso\Excel\Exceptions\ExcelExport as Exception;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExcelExport
 {
     private Writer $writer;
     private ExportsExcel $exporter;
-    private bool $inline;
 
     public function __construct(ExportsExcel $exporter)
     {
         $this->exporter = $exporter;
-        $this->inline = true;
     }
 
-    public function inline(): string
+    public function inline(): BinaryFileResponse
     {
         $this->handle();
 
-        return $this->exporter->filename();
+        return Response::download(
+            $this->path(),
+            $this->exporter->filename()
+        )->deleteFileAfterSend();
     }
 
     public function save(): string
     {
-        if (! $this->exporter instanceof SavesToDisk) {
-            throw Exception::missingInterface();
-        }
-
-        $this->inline = false;
-
         $this->handle();
 
-        return $this->filePath();
+        return $this->path();
     }
 
     private function handle(): void
     {
         $this->writer();
-
+        \Log::info('writer init');
         Collection::wrap($this->exporter->sheets())
-            ->each(fn ($sheet, $sheetIndex) => $this->sheet($sheet, $sheetIndex)
+            ->each(fn ($sheet, $index) => $this
+                ->sheet($sheet, $index)
                 ->heading($sheet)
                 ->rows($sheet));
-
+        \Log::info('done');
         $this->writer->close();
     }
 
@@ -65,18 +63,12 @@ class ExcelExport
 
         $this->writer->setDefaultRowStyle($defaultStyle);
 
-        if ($this->inline) {
-            $this->writer->openToBrowser($this->exporter->filename());
-
-            return $this;
-        }
-
-        $this->writer->openToFile($this->filePath());
+        $this->writer->openToFile($this->path());
     }
 
-    private function sheet(string $sheet, int $sheetIndex): self
+    private function sheet(string $sheet, int $index): self
     {
-        if ($sheetIndex > 0) {
+        if ($index > 0) {
             $this->writer->addNewSheetAndMakeItCurrent();
         }
 
@@ -106,10 +98,12 @@ class ExcelExport
         return WriterEntityFactory::createRowFromArray($data);
     }
 
-    private function filePath(): string
+    private function path(): string
     {
-        return $this->exporter->path()
-            .DIRECTORY_SEPARATOR
-            .$this->exporter->filename();
+        $folder = $this->exporter instanceof SavesToDisk
+            ? $this->exporter->folder()
+            : 'temp';
+
+        return Storage::path("{$folder}/{$this->exporter->filename()}");
     }
 }

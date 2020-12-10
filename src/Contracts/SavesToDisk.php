@@ -4,5 +4,5 @@ namespace LaravelEnso\Excel\Contracts;
 
 interface SavesToDisk
 {
-    public function path(): string;
+    public function folder(): string;
 }
