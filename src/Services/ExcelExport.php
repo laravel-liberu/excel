@@ -21,6 +21,7 @@ class ExcelExport
     public function __construct(ExportsExcel $exporter)
     {
         $this->exporter = $exporter;
+        $this->writer = $this->writer();
     }
 
     public function inline(): BinaryFileResponse
@@ -42,7 +43,7 @@ class ExcelExport
 
     private function handle(): void
     {
-        $this->writer();
+        $this->writer->openToFile($this->path());
 
         Collection::wrap($this->exporter->sheets())
             ->each(fn ($sheet, $index) => $this
@@ -51,19 +52,6 @@ class ExcelExport
                 ->rows($sheet));
 
         $this->writer->close();
-    }
-
-    private function writer()
-    {
-        $defaultStyle = (new StyleBuilder())
-            ->setShouldWrapText(false)
-            ->build();
-
-        $this->writer = WriterEntityFactory::createXLSXWriter();
-
-        $this->writer->setDefaultRowStyle($defaultStyle);
-
-        $this->writer->openToFile($this->path());
     }
 
     private function sheet(string $sheet, int $index): self
@@ -109,5 +97,15 @@ class ExcelExport
         }
 
         return Storage::path("{$folder}/{$this->exporter->filename()}");
+    }
+
+    private function writer(): Writer
+    {
+        $defaultStyle = (new StyleBuilder())
+            ->setShouldWrapText(false)
+            ->build();
+
+        return WriterEntityFactory::createXLSXWriter()
+            ->setDefaultRowStyle($defaultStyle);
     }
 }
