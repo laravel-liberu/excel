@@ -16,22 +16,18 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class ExcelExport
 {
     private Writer $writer;
-    private ExportsExcel $exporter;
 
-    public function __construct(ExportsExcel $exporter)
+    public function __construct(private ExportsExcel $exporter)
     {
-        $this->exporter = $exporter;
         $this->writer = $this->writer();
     }
 
     public function inline(): BinaryFileResponse
     {
         $this->handle();
+        $args = [$this->path(), $this->exporter->filename()];
 
-        return Response::download(
-            $this->path(),
-            $this->exporter->filename()
-        )->deleteFileAfterSend();
+        return Response::download(...$args)->deleteFileAfterSend();
     }
 
     public function save(): string
