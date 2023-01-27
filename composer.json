@@ -1,31 +1,31 @@
 {
-    "name": "laravel-enso/excel",
+    "name": "cgdsoftware/excel",
     "description": "Excel for Laravel Enso",
     "keywords": [
-        "laravel-enso",
+        "cgdsoftware",
         "excel",
         "laravel"
     ],
-    "homepage": "https://github.com/laravel-enso/excel",
+    "homepage": "https://github.com/cgdsoftware/excel",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "Ionut Pirvulescu",
             "email": "ionut.pirvulescu@earthlink.ro",
-            "homepage": "https://laravel-enso.com",
+            "homepage": "https://cgdsoftware.com",
             "role": "Developer"
         },
         {
             "name": "Mihai Ocneanu",
             "email": "mihai.ocneanu@gmail.com",
-            "homepage": "https://laravel-enso.com",
+            "homepage": "https://cgdsoftware.com",
             "role": "Developer"
         },
         {
             "name": "Adrian Ocneanu",
             "email": "aocneanu@gmail.com",
-            "homepage": "https://laravel-enso.com",
+            "homepage": "https://cgdsoftware.com",
             "role": "Developer"
         }
     ],
