@@ -6,7 +6,7 @@
 [![Total Downloads](https://poser.pugx.org/laravel-enso/excel/downloads)](https://packagist.org/packages/laravel-enso/excel)
 [![Latest Stable Version](https://poser.pugx.org/laravel-enso/excel/version)](https://packagist.org/packages/laravel-enso/excel)
 
-This package can work independently of the [Enso](https://github.com/laravel-enso/Enso) ecosystem.
+This package can work independently of the [Liberu](https://github.com/laravel-enso/Liberu) ecosystem.
 
 ### Installation, Configuration & Usage
 
