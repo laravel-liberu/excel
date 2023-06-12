@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExcelExport
 {
-    private Writer $writer;
+    private readonly Writer $writer;
 
-    public function __construct(private ExportsExcel $exporter)
+    public function __construct(private readonly ExportsExcel $exporter)
     {
         $this->writer = $this->writer();
     }
