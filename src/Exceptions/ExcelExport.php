@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Excel\Exceptions;
+namespace LaravelLiberu\Excel\Exceptions;
 
 use UnexpectedValueException;
 

@@ -35,7 +35,7 @@
     },
     "autoload": {
         "psr-4": {
-            "LaravelEnso\\Excel\\": "src/"
+            "LaravelLiberu\\Excel\\": "src/"
         }
     },
     "require-dev": {

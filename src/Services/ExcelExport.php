@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Excel\Services;
+namespace LaravelLiberu\Excel\Services;
 
 use Box\Spout\Common\Entity\Row;
 use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
@@ -9,8 +9,8 @@ use Box\Spout\Writer\XLSX\Writer;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use LaravelEnso\Excel\Contracts\ExportsExcel;
-use LaravelEnso\Excel\Contracts\SavesToDisk;
+use LaravelLiberu\Excel\Contracts\ExportsExcel;
+use LaravelLiberu\Excel\Contracts\SavesToDisk;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExcelExport

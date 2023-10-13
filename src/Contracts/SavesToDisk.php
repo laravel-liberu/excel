@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Excel\Contracts;
+namespace LaravelLiberu\Excel\Contracts;
 
 interface SavesToDisk
 {

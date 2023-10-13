@@ -10,7 +10,7 @@ This package can work independently of the [Liberu](https://github.com/laravel-e
 
 ### Installation, Configuration & Usage
 
-Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/backend/excel.html)
+Be sure to check out the full documentation for this package available at [docs.liberu.co.uk](https://docs.liberu.co.uk/backend/excel.html)
 
 ### Contributions
 
